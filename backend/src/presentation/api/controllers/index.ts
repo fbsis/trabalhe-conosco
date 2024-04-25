@@ -1,0 +1,5 @@
+export * from './CreateProducerController'
+export * from './ReadProducerController'
+export * from './UpdateProducerController'
+export * from './DeleteProducerController'
+export * from './MetricController'

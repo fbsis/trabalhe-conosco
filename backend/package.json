@@ -64,6 +64,7 @@
     "rimraf": "^5.0.5",
     "superagent-proxy": "^3.0.0",
     "swagger-ui-express": "^5.0.0",
+    "ts-mockito": "^2.6.1",
     "typeorm": "^0.3.20",
     "uuid": "^9.0.1",
     "xss-clean": "^0.1.1"

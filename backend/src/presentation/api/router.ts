@@ -13,7 +13,6 @@ export class ExpressRouter {
 
     this.router.get('/v1/health', healthCheck)
 
-
     this.router.post('/v1/producer', this.adapterController(new CreateProducerController()))
     this.router.get('/v1/producer', this.adapterController(new ReadProducerController()))
     this.router.patch('/v1/producer', this.adapterController(new UpdateProducerController()))

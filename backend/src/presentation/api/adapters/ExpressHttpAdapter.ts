@@ -1,6 +1,6 @@
 import { HttpServer } from '@/infra/protocols'
 import { ExpressRouter } from '@/presentation/api/router'
-
+import { serve as serveSwagger, setup as setupSwagger } from 'swagger-ui-express'
 import { Server } from 'http'
 import express, { RequestHandler, Express } from 'express'
 import cors from 'cors'
@@ -8,6 +8,8 @@ import helmet from 'helmet'
 import xss from 'xss-clean'
 import hpp from 'hpp'
 import { DatabaseConnection } from '@/infra/repository'
+import nocache from 'nocache'
+import openApi from '@/swagger'
 
 export class ExpressHttpAdapter implements HttpServer {
   private readonly app: Express = express();
@@ -25,6 +27,7 @@ export class ExpressHttpAdapter implements HttpServer {
     this.setupDatabase()
     this.setupSecurity()
     this.setupRouter()
+    this.setupSwagger()
   }
 
   private setupRouter (): void {
@@ -32,6 +35,11 @@ export class ExpressHttpAdapter implements HttpServer {
     this.app.use(router)
   }
 
+  private setupSwagger (): void {
+    this.app.use('/api-docs', nocache(), serveSwagger, setupSwagger(openApi))
+    this.app.use('/api-docs.json', nocache(), (_, res) => res.send(openApi))
+  }
+  
   private setupDatabase (): void {
     const dbConnection = DatabaseConnection.getInstance();
     dbConnection.initialize().then(() => {

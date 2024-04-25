@@ -1,0 +1,14 @@
+FROM node:18-alpine
+
+RUN apk add --no-cache bash
+
+RUN npm config set cache /home/node/app/.npm-cache --global
+
+# For global dependencies
+RUN npm install -g typescript nodemon ts-prune npm-check
+
+RUN mkdir -p /home/node/app
+
+USER node
+
+WORKDIR /home/node/app

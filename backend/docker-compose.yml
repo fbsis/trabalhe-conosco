@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    entrypoint: ./.docker/entrypoint.sh
+    container_name: brain-agriculture
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
+      - SERVICE_NAME=brain-agriculture
+      - PORT=3000
+    volumes:
+      - .:/home/node/app
+
+  db:
+    image: postgres
+    container_name: brain-agriculture-db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=brain-griculture

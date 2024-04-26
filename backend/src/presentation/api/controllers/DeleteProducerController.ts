@@ -8,7 +8,7 @@ export class DeleteProducerController implements Controller {
   async handle(request: any): Promise<HttpResponse> {
     const producerCommandRepo = new ProducerCommandRepository();
     const updateInteractor = new DeleteProducerInteractor(producerCommandRepo);
-    updateInteractor.execute(request.document);
+    await updateInteractor.execute(request.document);
 
     return HttpResponse.ok({});
   }

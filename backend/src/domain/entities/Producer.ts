@@ -28,9 +28,15 @@ export class Producer {
     const documentStr = document.toString();
 
     if (documentStr.length === 11) {
-      DocumentValidator.isValidCPF(documentStr);
+      const checkResult = DocumentValidator.isValidCPF(documentStr);
+      if (!checkResult) {
+        throw new DomainException("Invalid CPF document.");
+      }
     } else if (documentStr.length === 14) {
-      DocumentValidator.isValidCNPJ(documentStr);
+      const checkResult = DocumentValidator.isValidCNPJ(documentStr);
+      if (!checkResult) {
+        throw new DomainException("Invalid CNPJ document.");
+      }
     } else {
       throw new DomainException(
         "Invalid document format. Document must be either CPF (11 digits) or CNPJ (14 digits)."

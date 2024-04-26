@@ -28,7 +28,7 @@ export class ProducerAdapter {
     return new Producer(
       producer.document,
       producer.name,
-      producer.farms.map(FarmAdapter.toDomain)
+      producer && producer.farms && producer.farms.map(FarmAdapter.toDomain)
     );
   }
 }
